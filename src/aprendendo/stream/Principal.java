@@ -3,6 +3,7 @@ package aprendendo.stream;
 import java.util.ArrayList;
 import java.util.DoubleSummaryStatistics;
 import java.util.List;
+import java.util.Map;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
@@ -79,5 +80,12 @@ public class Principal {
         reprovados
                 .filter(aluno -> aluno.getGenero() == 'M' && aluno.getNota() < NOTA_MIN_AAPROVACAO)
                 .forEach(System.out::println);
+
+        //Agrupar os alunos pelo tamanho do nome
+        Map<Integer, Long> resultado = alunos
+                .stream()
+                .collect(Collectors.groupingBy(aluno -> aluno.getName().length(), Collectors.counting()));
+        System.out.println("Resultado: " +  resultado);
+
     }
 }
